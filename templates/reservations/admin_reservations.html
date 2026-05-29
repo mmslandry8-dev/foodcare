@@ -28,6 +28,7 @@
                             <th>Heure</th>
                             <th>Places</th>
                             <th>Statut</th>
+                            <th>Action</th>     
 
                         </tr>
 
@@ -75,6 +76,17 @@
 
                                 </td>
 
+                                <td>
+
+                                    <a href="{% url 'update_reservation_status' reservation.id %}"
+                                        class="btn btn-success btn-sm">
+
+                                        Modifier
+
+                                    </a>
+
+                                </td>
+                                
                             </tr>
 
                         {% endfor %}

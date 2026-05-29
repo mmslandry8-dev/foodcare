@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="py-5 bg-light min-vh-100">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-6">
+
+                <div class="card border-0 shadow p-5">
+
+                    <h2 class="fw-bold text-success mb-4">
+
+                        Modifier réservation #{{ reservation.id }}
+
+                    </h2>
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+
+                                Nouveau statut
+
+                            </label>
+
+                            <select
+                                name="status"
+                                class="form-select">
+
+                                {% if reservation.status == 'pending' %}
+
+                                    <option value="confirmed">
+
+                                        Confirmée
+
+                                    </option>
+
+                                    <option value="cancelled">
+
+                                        Annulée
+
+                                    </option>
+
+                                {% elif reservation.status == 'confirmed' %}
+
+                                    <option value="completed">
+
+                                        Terminée
+
+                                    </option>
+
+                                {% endif %}
+
+                            </select>
+
+                        </div>
+
+                        <button
+                            class="btn btn-success w-100">
+
+                            Mettre à jour
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

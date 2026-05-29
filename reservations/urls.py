@@ -28,4 +28,10 @@ urlpatterns = [
         name='admin_reservations'
     ),
 
+    path(
+    'update/<int:pk>/',
+    views.update_reservation_status,
+    name='update_reservation_status'
+),
+
 ]

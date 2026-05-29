@@ -139,3 +139,89 @@ def admin_reservations(request):
         'reservations/admin_reservations.html',
         context
     )
+
+@staff_member_required
+def update_reservation_status(request, pk):
+    """
+    Mise à jour statut réservation
+    """
+
+    reservation = get_object_or_404(
+
+        Reservation,
+        id=pk
+
+    )
+
+    if request.method == 'POST':
+
+        new_status = request.POST.get(
+            'status'
+        )
+
+        allowed_transitions = {
+
+            'pending': [
+
+                'confirmed',
+                'cancelled'
+
+            ],
+
+            'confirmed': [
+
+                'completed'
+
+            ],
+
+            'completed': [],
+
+            'cancelled': [],
+
+        }
+
+        if new_status in allowed_transitions[
+            reservation.status
+        ]:
+
+            reservation.status = new_status
+
+            reservation.save()
+
+            messages.success(
+
+                request,
+
+                'Réservation mise à jour.'
+
+            )
+
+        else:
+
+            messages.error(
+
+                request,
+
+                'Transition interdite.'
+
+            )
+
+        return redirect(
+            'admin_reservations'
+        )
+
+    context = {
+
+        'reservation': reservation
+
+    }
+
+    return render(
+
+        request,
+
+        'reservations/update_reservation.html',
+
+        context
+
+    )
