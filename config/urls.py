@@ -27,6 +27,8 @@ urlpatterns = [
     # Application principale
     path('', include('core.urls')),
 
+    path('accounts/', include('accounts.urls')),
+
 ]
 
 # Configuration des fichiers media
