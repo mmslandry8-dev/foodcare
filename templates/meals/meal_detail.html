@@ -92,6 +92,67 @@
 
     </div>
 
+    <!-- RECOMMANDATIONS -->
+    <section class="py-5 bg-light mt-5">
+
+        <div class="container">
+
+            <h2 class="fw-bold text-success mb-4">
+
+                Repas recommandés
+
+            </h2>
+
+            <div class="row">
+
+                {% for item in recommended_meals %}
+
+                    <div class="col-lg-4">
+
+                        <div class="card border-0 shadow">
+
+                            <img
+                                src="{{ item.image.url }}"
+                                class="card-img-top"
+                                style="height: 220px;
+                                    object-fit: cover;"
+                            >
+
+                            <div class="card-body">
+
+                                <h5 class="fw-bold">
+
+                                    {{ item.name }}
+
+                                </h5>
+
+                                <p class="text-muted">
+
+                                    {{ item.description|truncatewords:10 }}
+
+                                </p>
+
+                                <a href="{% url 'meal_detail' item.id %}"
+                                class="btn btn-success">
+
+                                    Voir
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </section>
+
 </section>
 
 {% endblock %}

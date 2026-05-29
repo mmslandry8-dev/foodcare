@@ -6,7 +6,7 @@
 
     <div class="container">
 
-        <!-- TITRE -->
+        <!-- HEADER -->
         <div class="text-center mb-5">
 
             <h1 class="fw-bold text-success">
@@ -17,41 +17,235 @@
 
             <p class="text-muted">
 
-                Découvrez des repas adaptés
+                Trouvez des repas adaptés
                 à votre santé.
 
             </p>
 
         </div>
 
-        <!-- GRILLE -->
+        <!-- FILTRES -->
+        <div class="card border-0 shadow p-4 mb-5">
+
+            <form method="GET">
+
+                <div class="row">
+
+                    <!-- RECHERCHE -->
+                    <div class="col-lg-4 mb-3">
+
+                        <input
+                            type="text"
+                            name="q"
+                            class="form-control"
+                            placeholder="Rechercher un repas..."
+                            value="{{ request.GET.q }}"
+                        >
+
+                    </div>
+
+                    <!-- DIABETE -->
+                    <div class="col-lg-3 mb-3">
+
+                        <select
+                            name="diabetes"
+                            class="form-select">
+
+                            <option value="">
+
+                                Type de diabète
+
+                            </option>
+
+                            <option value="type1">
+
+                                Type 1
+
+                            </option>
+
+                            <option value="type2">
+
+                                Type 2
+
+                            </option>
+
+                            <option value="prediabetes">
+
+                                Prédiabète
+
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- BOUTON -->
+                    <div class="col-lg-2 mb-3">
+
+                        <button
+                            class="btn btn-success w-100">
+
+                            Filtrer
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- FILTRES CHECKBOX -->
+                <div class="row mt-3">
+
+                    <div class="col-md-2">
+
+                        <div class="form-check">
+
+                            <input
+                                type="checkbox"
+                                class="form-check-input"
+                                name="low_sugar"
+                            >
+
+                            <label class="form-check-label">
+
+                                Faible sucre
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-2">
+
+                        <div class="form-check">
+
+                            <input
+                                type="checkbox"
+                                class="form-check-input"
+                                name="low_carb"
+                            >
+
+                            <label class="form-check-label">
+
+                                Faible glucides
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-2">
+
+                        <div class="form-check">
+
+                            <input
+                                type="checkbox"
+                                class="form-check-input"
+                                name="high_fiber"
+                            >
+
+                            <label class="form-check-label">
+
+                                Riche fibres
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-2">
+
+                        <div class="form-check">
+
+                            <input
+                                type="checkbox"
+                                class="form-check-input"
+                                name="vegetarian"
+                            >
+
+                            <label class="form-check-label">
+
+                                Végétarien
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-2">
+
+                        <div class="form-check">
+
+                            <input
+                                type="checkbox"
+                                class="form-check-input"
+                                name="vegan"
+                            >
+
+                            <label class="form-check-label">
+
+                                Vegan
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+        <!-- LISTE REPAS -->
         <div class="row">
 
             {% for meal in meals %}
 
                 <div class="col-lg-4 col-md-6 mb-4">
 
-                    <div class="card border-0 shadow h-100">
+                    <div class="card border-0 shadow meal-card h-100">
 
                         <!-- IMAGE -->
-                        <img
-                            src="{{ meal.image.url }}"
-                            class="card-img-top"
-                            style="height: 250px;
-                                   object-fit: cover;"
-                        >
+                        <div class="overflow-hidden">
 
-                        <!-- CONTENU -->
+                            <img
+                                src="{{ meal.image.url }}"
+                                class="card-img-top meal-image"
+                            >
+
+                        </div>
+
+                        <!-- BODY -->
                         <div class="card-body">
 
-                            <!-- CATÉGORIE -->
-                            <span class="badge bg-success mb-2">
+                            <!-- BADGES -->
+                            <div class="mb-2">
 
-                                {{ meal.category.name }}
+                                <span class="badge bg-success">
 
-                            </span>
+                                    {{ meal.category.name }}
 
-                            <!-- NOM -->
+                                </span>
+
+                                {% if meal.is_popular %}
+
+                                    <span class="badge bg-warning text-dark">
+
+                                        Populaire
+
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+                            <!-- TITRE -->
                             <h4 class="fw-bold">
 
                                 {{ meal.name }}
@@ -65,10 +259,45 @@
 
                             </p>
 
-                            <!-- INFOS -->
+                            <!-- BADGES NUTRITION -->
                             <div class="mb-3">
 
-                                <small class="me-3">
+                                {% if meal.is_low_sugar %}
+
+                                    <span class="badge bg-info">
+
+                                        Faible sucre
+
+                                    </span>
+
+                                {% endif %}
+
+                                {% if meal.is_low_carb %}
+
+                                    <span class="badge bg-primary">
+
+                                        Low Carb
+
+                                    </span>
+
+                                {% endif %}
+
+                                {% if meal.is_high_fiber %}
+
+                                    <span class="badge bg-dark">
+
+                                        Fibres
+
+                                    </span>
+
+                                {% endif %}
+
+                            </div>
+
+                            <!-- INFOS -->
+                            <div class="d-flex justify-content-between">
+
+                                <small>
 
                                     🔥 {{ meal.calories }} kcal
 
@@ -76,14 +305,14 @@
 
                                 <small>
 
-                                    🍞 {{ meal.carbohydrates }}g glucides
+                                    🍞 {{ meal.carbohydrates }}g
 
                                 </small>
 
                             </div>
 
                             <!-- PRIX -->
-                            <h5 class="text-success fw-bold">
+                            <h5 class="text-success fw-bold mt-3">
 
                                 {{ meal.price }} FCFA
 
@@ -105,13 +334,13 @@
 
             {% empty %}
 
-                <div class="text-center">
+                <div class="text-center py-5">
 
-                    <p>
+                    <h4>
 
-                        Aucun repas disponible.
+                        Aucun repas trouvé.
 
-                    </p>
+                    </h4>
 
                 </div>
 

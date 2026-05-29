@@ -2,22 +2,97 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from django.contrib.auth.decorators import login_required
 
-from .models import Meal
+import meals
+
+from .models import Meal, Category
 from .forms import MealForm
 
 
 def meal_list(request):
     """
-    Liste des repas
+    Liste des repas + recherche + filtres
     """
 
     meals = Meal.objects.filter(
         is_available=True
     )
 
+    categories = Category.objects.all()
+
+    # =========================
+    # RECHERCHE
+    # =========================
+
+    query = request.GET.get('q')
+
+    if query:
+
+        meals = meals.filter(
+
+            name__icontains=query
+
+        ) | meals.filter(
+
+            ingredients__icontains=query
+
+        ) | meals.filter(
+
+            category__name__icontains=query
+
+        )
+
+    # =========================
+    # FILTRE TYPE DIABETE
+    # =========================
+
+    diabetes_type = request.GET.get(
+        'diabetes'
+    )
+
+    if diabetes_type:
+
+        meals = meals.filter(
+            diabetes_type=diabetes_type
+        )
+
+    # =========================
+    # FILTRES NUTRITIONNELS
+    # =========================
+
+    if request.GET.get('low_sugar'):
+
+        meals = meals.filter(
+            is_low_sugar=True
+        )
+
+    if request.GET.get('low_carb'):
+
+        meals = meals.filter(
+            is_low_carb=True
+        )
+
+    if request.GET.get('high_fiber'):
+
+        meals = meals.filter(
+            is_high_fiber=True
+        )
+
+    if request.GET.get('vegetarian'):
+
+        meals = meals.filter(
+            is_vegetarian=True
+        )
+
+    if request.GET.get('vegan'):
+
+        meals = meals.filter(
+            is_vegan=True
+        )
+
     context = {
 
-        'meals': meals
+        'meals': meals,
+        'categories': categories
 
     }
 
@@ -26,7 +101,6 @@ def meal_list(request):
         'meals/meal_list.html',
         context
     )
-
 
 def meal_detail(request, pk):
     """
@@ -38,9 +112,21 @@ def meal_detail(request, pk):
         pk=pk
     )
 
+    recommended_meals = Meal.objects.filter(
+
+        diabetes_type=meal.diabetes_type,
+        is_available=True
+
+    ).exclude(
+
+        id=meal.id
+
+    )[:3]
+
     context = {
 
-        'meal': meal
+        'meal': meal,
+        'recommended_meals': recommended_meals
 
     }
 

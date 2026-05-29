@@ -153,3 +153,39 @@ body {
     }
 
 }
+
+/* =========================
+   MEALS
+========================= */
+
+.meal-card {
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    transition: 0.3s ease;
+
+}
+
+.meal-card:hover {
+
+    transform: translateY(-8px);
+
+}
+
+.meal-image {
+
+    height: 250px;
+
+    object-fit: cover;
+
+    transition: 0.4s ease;
+
+}
+
+.meal-card:hover .meal-image {
+
+    transform: scale(1.05);
+
+}

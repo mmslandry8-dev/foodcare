@@ -85,6 +85,30 @@ class Meal(models.Model):
         default=True
     )
 
+    is_low_sugar = models.BooleanField(
+        default=False
+    )
+
+    is_low_carb = models.BooleanField(
+        default=False
+    )
+
+    is_high_fiber = models.BooleanField(
+        default=False
+    )
+
+    is_vegetarian = models.BooleanField(
+        default=False
+    )
+
+    is_vegan = models.BooleanField(
+        default=False
+    )
+
+    is_popular = models.BooleanField(
+        default=False
+    )
+
     created_at = models.DateTimeField(
         auto_now_add=True
     )
