@@ -1,0 +1,57 @@
+/* =========================
+   STYLE GLOBAL
+========================= */
+
+body {
+
+    font-family: Arial, sans-serif;
+    background-color: #f8fafc;
+
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar-brand {
+
+    letter-spacing: 1px;
+
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero-title {
+
+    line-height: 1.2;
+
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.card {
+
+    border-radius: 20px;
+    transition: 0.3s ease;
+
+}
+
+.card:hover {
+
+    transform: translateY(-10px);
+
+}
+
+/* =========================
+   BOUTONS
+========================= */
+
+.btn {
+
+    border-radius: 10px;
+
+}
