@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="row">
+
+            <!-- IMAGE -->
+            <div class="col-lg-6">
+
+                <img
+                    src="{{ meal.image.url }}"
+                    class="img-fluid rounded-4 shadow"
+                >
+
+            </div>
+
+            <!-- INFOS -->
+            <div class="col-lg-6">
+
+                <span class="badge bg-success mb-3">
+
+                    {{ meal.category.name }}
+
+                </span>
+
+                <h1 class="fw-bold">
+
+                    {{ meal.name }}
+
+                </h1>
+
+                <p class="lead text-muted">
+
+                    {{ meal.description }}
+
+                </p>
+
+                <!-- PRIX -->
+                <h3 class="text-success fw-bold my-4">
+
+                    {{ meal.price }} FCFA
+
+                </h3>
+
+                <!-- NUTRITION -->
+                <div class="card border-0 shadow-sm p-4">
+
+                    <h5 class="fw-bold mb-3">
+
+                        Informations nutritionnelles
+
+                    </h5>
+
+                    <ul class="list-group list-group-flush">
+
+                        <li class="list-group-item">
+                            Calories :
+                            {{ meal.calories }} kcal
+                        </li>
+
+                        <li class="list-group-item">
+                            Glucides :
+                            {{ meal.carbohydrates }} g
+                        </li>
+
+                        <li class="list-group-item">
+                            Protéines :
+                            {{ meal.proteins }} g
+                        </li>
+
+                        <li class="list-group-item">
+                            Lipides :
+                            {{ meal.lipids }} g
+                        </li>
+
+                        <li class="list-group-item">
+                            Indice glycémique :
+                            {{ meal.glycemic_index }}
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

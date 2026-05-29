@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="py-5">
+
+    <div class="container">
+
+        <!-- TITRE -->
+        <div class="text-center mb-5">
+
+            <h1 class="fw-bold text-success">
+
+                Nos repas spécialisés
+
+            </h1>
+
+            <p class="text-muted">
+
+                Découvrez des repas adaptés
+                à votre santé.
+
+            </p>
+
+        </div>
+
+        <!-- GRILLE -->
+        <div class="row">
+
+            {% for meal in meals %}
+
+                <div class="col-lg-4 col-md-6 mb-4">
+
+                    <div class="card border-0 shadow h-100">
+
+                        <!-- IMAGE -->
+                        <img
+                            src="{{ meal.image.url }}"
+                            class="card-img-top"
+                            style="height: 250px;
+                                   object-fit: cover;"
+                        >
+
+                        <!-- CONTENU -->
+                        <div class="card-body">
+
+                            <!-- CATÉGORIE -->
+                            <span class="badge bg-success mb-2">
+
+                                {{ meal.category.name }}
+
+                            </span>
+
+                            <!-- NOM -->
+                            <h4 class="fw-bold">
+
+                                {{ meal.name }}
+
+                            </h4>
+
+                            <!-- DESCRIPTION -->
+                            <p class="text-muted">
+
+                                {{ meal.description|truncatewords:15 }}
+
+                            </p>
+
+                            <!-- INFOS -->
+                            <div class="mb-3">
+
+                                <small class="me-3">
+
+                                    🔥 {{ meal.calories }} kcal
+
+                                </small>
+
+                                <small>
+
+                                    🍞 {{ meal.carbohydrates }}g glucides
+
+                                </small>
+
+                            </div>
+
+                            <!-- PRIX -->
+                            <h5 class="text-success fw-bold">
+
+                                {{ meal.price }} FCFA
+
+                            </h5>
+
+                            <!-- BOUTON -->
+                            <a href="{% url 'meal_detail' meal.id %}"
+                               class="btn btn-success w-100 mt-3">
+
+                                Voir détails
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% empty %}
+
+                <div class="text-center">
+
+                    <p>
+
+                        Aucun repas disponible.
+
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

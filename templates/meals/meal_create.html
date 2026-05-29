@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <div class="card border-0 shadow p-5">
+
+                    <h2 class="fw-bold text-success mb-4">
+
+                        Ajouter un repas
+
+                    </h2>
+
+                    <form
+                        method="POST"
+                        enctype="multipart/form-data">
+
+                        {% csrf_token %}
+
+                        {{ form.as_p }}
+
+                        <button
+                            type="submit"
+                            class="btn btn-success">
+
+                            Enregistrer
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

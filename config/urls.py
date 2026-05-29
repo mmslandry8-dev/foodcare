@@ -29,6 +29,8 @@ urlpatterns = [
 
     path('accounts/', include('accounts.urls')),
 
+    path('meals/', include('meals.urls')),
+
 ]
 
 # Configuration des fichiers media
