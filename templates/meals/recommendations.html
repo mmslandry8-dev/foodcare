@@ -1,0 +1,199 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="py-5 bg-light min-vh-100">
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="text-center mb-5">
+
+            <h1 class="fw-bold text-success">
+
+                Recommandations intelligentes
+
+            </h1>
+
+            <p class="lead">
+
+                Repas adaptés à votre profil nutritionnel
+
+            </p>
+
+        </div>
+
+        <!-- FILTRES -->
+        <div class="row justify-content-center mb-5">
+
+            <div class="col-lg-8">
+
+                <form method="GET">
+
+                    <div class="row">
+
+                        <div class="col-md-9 mb-3">
+
+                            <select
+                                name="type"
+                                class="form-select form-select-lg">
+
+                                <option value="type1">
+
+                                    Diabète Type 1
+
+                                </option>
+
+                                <option value="type2">
+
+                                    Diabète Type 2
+
+                                </option>
+
+                                <option value="prediabetes">
+
+                                    Prédiabète
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <button
+                                class="btn btn-success btn-lg w-100">
+
+                                Analyser
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- RESULTATS -->
+        <div class="row">
+
+            {% for meal in meals %}
+
+                <div class="col-lg-4 mb-4">
+
+                    <div class="card border-0 shadow h-100">
+
+                        <img src="{{ meal.image.url }}"
+                             class="card-img-top"
+                             style="height:250px;object-fit:cover;">
+
+                        <div class="card-body">
+
+                            <div class="d-flex
+                                        justify-content-between
+                                        align-items-center
+                                        mb-3">
+
+                                <h4 class="fw-bold">
+
+                                    {{ meal.name }}
+
+                                </h4>
+
+                                <span class="badge bg-success">
+
+                                    {{ meal.health_score }}/100
+
+                                </span>
+
+                            </div>
+
+                            <p class="text-muted">
+
+                                {{ meal.description|truncatewords:15 }}
+
+                            </p>
+
+                            <!-- BADGES -->
+                            <div class="mb-3">
+
+                                {% for badge in meal.nutrition_badges %}
+
+                                    <span class="badge bg-dark">
+
+                                        {{ badge }}
+
+                                    </span>
+
+                                {% endfor %}
+
+                            </div>
+
+                            <!-- INFOS -->
+                            <ul class="list-group list-group-flush mb-3">
+
+                                <li class="list-group-item">
+
+                                    🔥 {{ meal.calories }} kcal
+
+                                </li>
+
+                                <li class="list-group-item">
+
+                                    🍞 {{ meal.carbohydrates }}g glucides
+
+                                </li>
+
+                                <li class="list-group-item">
+
+                                    🩸 IG {{ meal.glycemic_index }}
+
+                                </li>
+
+                                <li class="list-group-item">
+
+                                    🌾 {{ meal.fiber }}g fibres
+
+                                </li>
+
+                            </ul>
+
+                            <a href="{% url 'meal_detail' meal.id %}"
+                               class="btn btn-success w-100">
+
+                                Voir détails
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            {% empty %}
+
+                <div class="text-center py-5">
+
+                    <h3>
+
+                        Aucun repas trouvé.
+
+                    </h3>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

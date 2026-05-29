@@ -81,6 +81,24 @@ class Meal(models.Model):
         choices=DIABETES_CHOICES
     )
 
+    recommended_for = models.CharField(
+        max_length=20,
+        choices=DIABETES_CHOICES,
+        default='type2'
+    )
+
+    fiber = models.DecimalField(
+        max_digits=5,
+        decimal_places=2,
+        default=0
+    )
+
+    sugar = models.DecimalField(
+        max_digits=5,
+        decimal_places=2,
+        default=0
+    )
+
     is_available = models.BooleanField(
         default=True
     )
@@ -105,6 +123,10 @@ class Meal(models.Model):
         default=False
     )
 
+    is_gluten_free = models.BooleanField(
+        default=False
+    )
+
     is_popular = models.BooleanField(
         default=False
     )
@@ -123,3 +145,58 @@ class Meal(models.Model):
             'meal_detail',
             kwargs={'pk': self.pk}
         )
+
+    @property
+    def health_score(self):
+        """
+        Calcul intelligent score santé
+        """
+
+        score = 100
+
+        # Pénalités glucides
+        if self.carbohydrates > 50:
+            score -= 20
+
+        elif self.carbohydrates > 30:
+            score -= 10
+
+        # Pénalités calories
+        if self.calories > 800:
+            score -= 15
+
+        # Bonus fibres
+        if self.fiber > 10:
+            score += 10
+
+        # Bonus faible sucre
+        if self.sugar < 10:
+            score += 5
+
+        # Bonus faible IG
+        if self.glycemic_index < 55:
+            score += 10
+
+        return max(score, 0)
+
+    @property
+    def nutrition_badges(self):
+
+        badges = []
+
+        if self.is_low_carb:
+            badges.append("Faible glucides")
+
+        if self.is_gluten_free:
+            badges.append("Sans gluten")
+
+        if self.is_vegan:
+            badges.append("Vegan")
+
+        if self.glycemic_index < 55:
+            badges.append("IG faible")
+
+        if self.is_high_fiber:
+            badges.append("Riche fibres")
+
+        return badges

@@ -21,4 +21,10 @@ urlpatterns = [
         name='meal_create'
     ),
 
+    path(
+        'recommendations/',
+        views.recommendations,
+        name='recommendations'
+    ),
+
 ]

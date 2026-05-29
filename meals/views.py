@@ -7,6 +7,8 @@ import meals
 from .models import Meal, Category
 from .forms import MealForm
 
+from .utils import get_recommended_meals
+
 
 def meal_list(request):
     """
@@ -166,4 +168,36 @@ def meal_create(request):
         request,
         'meals/meal_create.html',
         context
+    )
+
+def recommendations(request):
+    """
+    Recommandations nutritionnelles
+    """
+
+    diabetes_type = request.GET.get(
+        'type',
+        'type2'
+    )
+
+    meals = get_recommended_meals(
+        diabetes_type
+    )
+
+    context = {
+
+        'meals': meals,
+
+        'selected_type': diabetes_type
+
+    }
+
+    return render(
+
+        request,
+
+        'meals/recommendations.html',
+
+        context
+
     )
