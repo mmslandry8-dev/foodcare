@@ -6,6 +6,22 @@ from .models import Profile
 
 
 class RegisterForm(UserCreationForm):
+
+    def __init__(self, *args, **kwargs):
+
+        super().__init__(*args, **kwargs)
+
+        # Suppression des help_text
+        for field in self.fields.values():
+
+            field.help_text = ''
+
+            field.widget.attrs.update({
+
+                'class': 'form-control'
+
+            })
+
     """
     Formulaire d'inscription
     """
@@ -37,6 +53,19 @@ class RegisterForm(UserCreationForm):
 
 
 class ProfileForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+
+        super().__init__(*args, **kwargs)
+
+        for field in self.fields.values():
+
+            field.widget.attrs.update({
+
+                'class': 'form-control'
+
+            })
+
     """
     Formulaire du profil utilisateur
     """

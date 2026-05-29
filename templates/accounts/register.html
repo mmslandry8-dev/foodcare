@@ -1,38 +1,151 @@
-{% extends 'base.html' %}
+{% extends 'auth_base.html' %}
 
 {% block content %}
 
-<section class="py-5">
+<section class="auth-section d-flex align-items-center">
 
     <div class="container">
 
-        <div class="row justify-content-center">
+        <div class="row justify-content-center align-items-center">
 
-            <div class="col-lg-6">
+            <div class="col-lg-5">
 
-                <div class="card shadow border-0 p-5">
+                <div class="card border-0 shadow-lg p-5 auth-card">
 
-                    <h2 class="text-center text-success mb-4">
+                    <!-- TITRE -->
+                    <div class="text-center mb-4">
 
-                        Créer un compte
+                        <h2 class="fw-bold text-success">
 
-                    </h2>
+                            Créer un compte
 
+                        </h2>
+
+                        <p class="text-muted">
+
+                            Rejoignez FoodCare dès aujourd'hui
+
+                        </p>
+
+                    </div>
+
+                    <!-- FORMULAIRE -->
                     <form method="POST">
 
                         {% csrf_token %}
 
-                        {{ form.as_p }}
+                        <!-- USERNAME -->
+                        <div class="mb-3">
 
+                            <label class="form-label">
+
+                                Nom d'utilisateur
+
+                            </label>
+
+                            {{ form.username }}
+
+                            {% if form.username.errors %}
+                                <div class="text-danger small">
+                                    {{ form.username.errors }}
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+                        <!-- FIRST NAME -->
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Prénom
+
+                            </label>
+
+                            {{ form.first_name }}
+
+                        </div>
+
+                        <!-- LAST NAME -->
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Nom
+
+                            </label>
+
+                            {{ form.last_name }}
+
+                        </div>
+
+                        <!-- EMAIL -->
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Email
+
+                            </label>
+
+                            {{ form.email }}
+
+                        </div>
+
+                        <!-- PASSWORD -->
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Mot de passe
+
+                            </label>
+
+                            {{ form.password1 }}
+
+                        </div>
+
+                        <!-- PASSWORD CONFIRM -->
+                        <div class="mb-4">
+
+                            <label class="form-label">
+
+                                Confirmation mot de passe
+
+                            </label>
+
+                            {{ form.password2 }}
+
+                        </div>
+
+                        <!-- BOUTON -->
                         <button
                             type="submit"
-                            class="btn btn-success w-100">
+                            class="btn btn-success w-100 auth-btn">
 
-                            S'inscrire
+                            Créer mon compte
 
                         </button>
 
                     </form>
+
+                    <!-- LOGIN -->
+                    <div class="text-center mt-4">
+
+                        <p>
+
+                            Déjà un compte ?
+
+                            <a href="{% url 'login' %}"
+                               class="text-success fw-bold">
+
+                                Se connecter
+
+                            </a>
+
+                        </p>
+
+                    </div>
 
                 </div>
 
