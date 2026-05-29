@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="card border-0 shadow p-5">
+
+            <!-- HEADER -->
+            <div class="d-flex
+                        justify-content-between
+                        align-items-center
+                        mb-4">
+
+                <div>
+
+                    <h2 class="fw-bold text-success">
+
+                        Commande #{{ order.id }}
+
+                    </h2>
+
+                    <p class="text-muted">
+
+                        {{ order.created_at|date:"d/m/Y H:i" }}
+
+                    </p>
+
+                </div>
+
+                <!-- STATUS -->
+                <div>
+
+                    {% if order.status == 'pending' %}
+
+                        <span class="badge bg-warning p-3">
+
+                            En attente
+
+                        </span>
+
+                    {% elif order.status == 'ready' %}
+
+                        <span class="badge bg-info p-3">
+
+                            Prête
+
+                        </span>
+
+                    {% elif order.status == 'delivery' %}
+
+                        <span class="badge bg-primary p-3">
+
+                            En livraison
+
+                        </span>
+
+                    {% elif order.status == 'delivered' %}
+
+                        <span class="badge bg-success p-3">
+
+                            Livrée
+
+                        </span>
+
+                    {% elif order.status == 'cancelled' %}
+
+                        <span class="badge bg-danger p-3">
+
+                            Annulée
+
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <!-- PRODUITS -->
+            <h4 class="fw-bold mb-4">
+
+                Produits commandés
+
+            </h4>
+
+            {% for item in order.items.all %}
+
+                <div class="row align-items-center mb-4">
+
+                    <div class="col-lg-2">
+
+                        <img
+                            src="{{ item.meal.image.url }}"
+                            class="img-fluid rounded"
+                        >
+
+                    </div>
+
+                    <div class="col-lg-4">
+
+                        <h5>
+
+                            {{ item.meal.name }}
+
+                        </h5>
+
+                    </div>
+
+                    <div class="col-lg-2">
+
+                        x{{ item.quantity }}
+
+                    </div>
+
+                    <div class="col-lg-2">
+
+                        {{ item.price }} FCFA
+
+                    </div>
+
+                    <div class="col-lg-2 fw-bold">
+
+                        {{ item.total_price }} FCFA
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+            <hr>
+
+            <!-- TOTAL -->
+            <div class="d-flex justify-content-between">
+
+                <h4>Total :</h4>
+
+                <h3 class="text-success fw-bold">
+
+                    {{ order.total_price }} FCFA
+
+                </h3>
+
+            </div>
+
+            <!-- ADRESSE -->
+            <div class="mt-5">
+
+                <h5 class="fw-bold">
+
+                    Adresse livraison
+
+                </h5>
+
+                <p class="text-muted">
+
+                    {{ order.delivery_address }}
+
+                </p>
+
+            </div>
+
+            <!-- BOUTON J'AI RECU -->
+            {% if order.can_confirm_delivery %}
+
+                <div class="mt-4">
+
+                    <a href="{% url 'confirm_delivery' order.id %}"
+                       class="btn btn-success btn-lg">
+
+                        J'ai reçu ma commande
+
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

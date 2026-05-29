@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="py-5">
+
+    <div class="container">
+
+        <h1 class="fw-bold text-success mb-5">
+
+            Mes commandes
+
+        </h1>
+
+        {% if orders %}
+
+            <div class="row">
+
+                {% for order in orders %}
+
+                    <div class="col-lg-6 mb-4">
+
+                        <div class="card border-0 shadow h-100">
+
+                            <div class="card-body">
+
+                                <!-- HEADER -->
+                                <div class="d-flex
+                                            justify-content-between
+                                            align-items-center
+                                            mb-3">
+
+                                    <h5 class="fw-bold">
+
+                                        Commande #{{ order.id }}
+
+                                    </h5>
+
+                                    <!-- STATUS -->
+                                    {% if order.status == 'pending' %}
+
+                                        <span class="badge bg-warning">
+
+                                            En attente
+
+                                        </span>
+
+                                    {% elif order.status == 'ready' %}
+
+                                        <span class="badge bg-info">
+
+                                            Prête
+
+                                        </span>
+
+                                    {% elif order.status == 'delivery' %}
+
+                                        <span class="badge bg-primary">
+
+                                            En livraison
+
+                                        </span>
+
+                                    {% elif order.status == 'delivered' %}
+
+                                        <span class="badge bg-success">
+
+                                            Livrée
+
+                                        </span>
+
+                                    {% elif order.status == 'cancelled' %}
+
+                                        <span class="badge bg-danger">
+
+                                            Annulée
+
+                                        </span>
+
+                                    {% endif %}
+
+                                </div>
+
+                                <!-- INFOS -->
+                                <p class="text-muted">
+
+                                    {{ order.created_at|date:"d/m/Y H:i" }}
+
+                                </p>
+
+                                <h4 class="text-success fw-bold">
+
+                                    {{ order.total_price }} FCFA
+
+                                </h4>
+
+                                <!-- BOUTON -->
+                                <a href="{% url 'order_detail' order.id %}"
+                                   class="btn btn-success mt-3">
+
+                                    Voir détails
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="text-center py-5">
+
+                <h3>
+
+                    Aucune commande.
+
+                </h3>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

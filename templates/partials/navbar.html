@@ -57,10 +57,31 @@
 
                 <li class="nav-item mx-2">
 
-                    <a class="nav-link"
+                    <a class="nav-link position-relative"
                         href="{% url 'cart' %}">
 
                             🛒 Panier
+
+                            {% if cart_count > 0 %}
+
+                                <span class="badge rounded-pill bg-danger">
+
+                                    {{ cart_count }}
+
+                                </span>
+
+                            {% endif %}
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item mx-2">
+
+                    <a class="nav-link"
+                        href="{% url 'order_list' %}">
+
+                        📦 Mes commandes
 
                     </a>
 
