@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="py-5">
+
+    <div class="container">
+
+        <h1 class="fw-bold text-success mb-5">
+
+            Mes réservations
+
+        </h1>
+
+        <div class="row">
+
+            {% for reservation in reservations %}
+
+                <div class="col-lg-6 mb-4">
+
+                    <div class="card border-0 shadow p-4">
+
+                        <div class="d-flex
+                                    justify-content-between
+                                    align-items-center
+                                    mb-3">
+
+                            <h5>
+
+                                Réservation #{{ reservation.id }}
+
+                            </h5>
+
+                            {% if reservation.status == 'pending' %}
+
+                                <span class="badge bg-warning">
+
+                                    En attente
+
+                                </span>
+
+                            {% elif reservation.status == 'confirmed' %}
+
+                                <span class="badge bg-success">
+
+                                    Confirmée
+
+                                </span>
+
+                            {% elif reservation.status == 'cancelled' %}
+
+                                <span class="badge bg-danger">
+
+                                    Annulée
+
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+                        <p>
+
+                            📅 {{ reservation.reservation_date }}
+
+                        </p>
+
+                        <p>
+
+                            ⏰ {{ reservation.reservation_time }}
+
+                        </p>
+
+                        <p>
+
+                            👥 {{ reservation.number_of_guests }} places
+
+                        </p>
+
+                        {% if reservation.special_request %}
+
+                            <p>
+
+                                📝 {{ reservation.special_request }}
+
+                            </p>
+
+                        {% endif %}
+
+                        {% if reservation.status == 'pending' %}
+
+                            <a href="{% url 'cancel_reservation' reservation.id %}"
+                               class="btn btn-danger">
+
+                                Annuler
+
+                            </a>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            {% empty %}
+
+                <div class="text-center py-5">
+
+                    <h3>
+
+                        Aucune réservation.
+
+                    </h3>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

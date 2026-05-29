@@ -36,6 +36,11 @@ urlpatterns = [
     # Dashboard
     path('dashboard/', include('dashboard.urls')),
 
+    path(
+        'reservations/',
+        include('reservations.urls')
+    ),
+
 ]
 
 # Configuration des fichiers media

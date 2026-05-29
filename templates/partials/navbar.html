@@ -87,6 +87,28 @@
 
                 </li>
 
+                <li class="nav-item mx-2">
+
+                    <a class="nav-link"
+                        href="{% url 'reserve_table' %}">
+
+                            🍽 Réserver
+
+                    </a>
+
+                </li>
+
+                <li class="nav-item mx-2">
+
+                    <a class="nav-link"
+                        href="{% url 'reservation_list' %}">
+
+                        📅 Réservations
+
+                    </a>
+
+                </li>
+
                 <!-- BOUTONS -->
                 {% if user.is_authenticated %}
 
@@ -98,6 +120,17 @@
                                 href="{% url 'dashboard' %}">
 
                                     📊 Dashboard
+
+                            </a>
+
+                        </li>
+
+                        <li class="nav-item mx-2">
+
+                            <a class="nav-link"
+                                href="{% url 'admin_reservations' %}">
+
+                                🪑 Gestion réservations
 
                             </a>
 
