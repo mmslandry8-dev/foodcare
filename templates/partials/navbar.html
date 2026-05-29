@@ -3,62 +3,76 @@
     <div class="container">
 
         <!-- LOGO -->
-        <a class="navbar-brand fw-bold fs-3" href="#">
+        <a class="navbar-brand fw-bold fs-3"
+           href="{% url 'home' %}">
 
             <i class="bi bi-heart-pulse-fill"></i>
+
             FoodCare
 
         </a>
 
-        <!-- BOUTON MOBILE -->
+        <!-- TOGGLER -->
         <button
             class="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#navbarContent"
-        >
+            data-bs-target="#navbarContent">
 
             <span class="navbar-toggler-icon"></span>
 
         </button>
 
-        <!-- CONTENU NAVBAR -->
+        <!-- MENU -->
         <div
             class="collapse navbar-collapse"
-            id="navbarContent"
-        >
+            id="navbarContent">
 
-            <!-- MENU -->
             <ul class="navbar-nav ms-auto align-items-lg-center">
 
+                <!-- ACCUEIL -->
                 <li class="nav-item mx-2">
-                    <a class="nav-link active" href="{% url 'home' %}">
+
+                    <a class="nav-link"
+                       href="{% url 'home' %}">
+
                         Accueil
+
                     </a>
+
                 </li>
 
+                <!-- MENUS -->
                 <li class="nav-item mx-2">
-                    <a class="nav-link" href="{% url 'meal_list' %}">
+
+                    <a class="nav-link"
+                       href="{% url 'meal_list' %}">
+
                         Menus
+
                     </a>
+
                 </li>
 
+                <!-- CONTACT -->
                 <li class="nav-item mx-2">
-                    <a class="nav-link" href="#">
-                        Recommandations
-                    </a>
-                </li>
 
-                <li class="nav-item mx-2">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link"
+                       href="#">
+
                         Contact
+
                     </a>
+
                 </li>
 
-                <li class="nav-item mx-2">
+                <!-- PANIER -->
+                {% if user.is_authenticated %}
 
-                    <a class="nav-link position-relative"
-                        href="{% url 'cart' %}">
+                    <li class="nav-item mx-2">
+
+                        <a class="nav-link position-relative"
+                           href="{% url 'cart' %}">
 
                             🛒 Panier
 
@@ -72,112 +86,47 @@
 
                             {% endif %}
 
-                    </a>
+                        </a>
 
-                </li>
+                    </li>
 
-                <li class="nav-item mx-2">
+                {% endif %}
 
-                    <a class="nav-link"
-                        href="{% url 'order_list' %}">
-
-                        📦 Mes commandes
-
-                    </a>
-
-                </li>
-
-                <li class="nav-item mx-2">
-
-                    <a class="nav-link"
-                        href="{% url 'reserve_table' %}">
-
-                            🍽 Réserver
-
-                    </a>
-
-                </li>
-
-                <li class="nav-item mx-2">
-
-                    <a class="nav-link"
-                        href="{% url 'reservation_list' %}">
-
-                        📅 Réservations
-
-                    </a>
-
-                </li>
-
-                <li class="nav-item mx-2">
-
-                    <a class="nav-link"
-                        href="{% url 'payment_history' %}">
-
-                            💳 Paiements
-
-                    </a>
-
-                </li>
-
-                <!-- BOUTONS -->
+                <!-- PROFIL -->
                 {% if user.is_authenticated %}
 
-                    {% if user.is_staff %}
-
-                        <li class="nav-item mx-2">
-
-                            <a class="nav-link"
-                                href="{% url 'dashboard' %}">
-
-                                    📊 Dashboard
-
-                            </a>
-
-                        </li>
-
-                        <li class="nav-item mx-2">
-
-                            <a class="nav-link"
-                                href="{% url 'admin_reservations' %}">
-
-                                🪑 Gestion réservations
-
-                            </a>
-
-                        </li>
-
-
-                    {% endif %}
-
                     <li class="nav-item mx-2">
 
                         <a class="nav-link"
-                            href="{% url 'profile' %}">
+                           href="{% url 'profile' %}">
 
-                            Profil
+                            👤 Profil
 
                         </a>
 
                     </li>
 
+                {% endif %}
+
+                <!-- AUTH -->
+                {% if user.is_authenticated %}
+
                     <li class="nav-item mx-2">
 
-                        <a class="nav-link"
-                            href="#">
+                        <span class="text-white fw-bold">
 
-                            [{{ user.username }}]
+                            {{ user.username }}
 
-                        </a>
+                        </span>
 
                     </li>
 
-                    <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+                    <li class="nav-item ms-lg-3">
 
                         <a href="{% url 'logout' %}"
-                            class="btn btn-light text-success fw-bold px-4">
+                           class="btn btn-light text-success fw-bold px-4">
 
-                                Déconnexion
+                            Déconnexion
 
                         </a>
 
@@ -185,10 +134,10 @@
 
                 {% else %}
 
-                    <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
+                    <li class="nav-item ms-lg-3">
 
                         <a href="{% url 'login' %}"
-                            class="btn btn-light text-success fw-bold px-4 me-2">
+                           class="btn btn-light text-success fw-bold px-4 me-2">
 
                             Connexion
 
@@ -196,10 +145,10 @@
 
                     </li>
 
-                    <li class="nav-item mt-3 mt-lg-0">
+                    <li class="nav-item">
 
                         <a href="{% url 'register' %}"
-                            class="btn btn-outline-light fw-bold px-4">
+                           class="btn btn-outline-light fw-bold px-4">
 
                             Inscription
 

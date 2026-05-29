@@ -207,3 +207,107 @@ body {
     transform: translateY(-8px);
 
 }
+
+/* =========================
+SIDEBAR
+========================= */
+
+.sidebar {
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    width: 260px;
+
+    height: 100vh;
+
+    background: linear-gradient(
+        180deg,
+        #198754,
+        #146c43
+    );
+
+    color: white;
+
+    padding: 30px 20px;
+
+    z-index: 2000;
+
+    overflow-y: auto;
+}
+
+.sidebar-header {
+
+    margin-bottom: 40px;
+}
+
+.sidebar-menu {
+
+    list-style: none;
+
+    padding: 0;
+}
+
+.sidebar-menu li {
+
+    margin-bottom: 15px;
+}
+
+.sidebar-menu a {
+
+    display: block;
+
+    padding: 14px 18px;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    color: white;
+
+    font-weight: 500;
+
+    transition: all 0.3s ease;
+}
+
+.sidebar-menu a:hover {
+
+    background: rgba(255,255,255,0.15);
+
+    transform: translateX(5px);
+}
+
+/* =========================
+CONTENU PRINCIPAL
+========================= */
+
+.main-content {
+
+    margin-left: 260px;
+
+    min-height: 100vh;
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width: 992px){
+
+    .sidebar {
+
+        width: 100%;
+
+        height: auto;
+
+        position: relative;
+    }
+
+    .main-content {
+
+        margin-left: 0;
+    }
+}

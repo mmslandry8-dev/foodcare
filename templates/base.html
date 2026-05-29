@@ -52,19 +52,30 @@
     <!-- NAVBAR -->
     {% include 'partials/navbar.html' %}
 
-    <!-- MESSAGES DJANGO -->
-    {% include 'partials/messages.html' %}
+    
 
-    <!-- CONTENU PRINCIPAL -->
-    {% block content %}
-    {% endblock %}
+     <!-- MAIN CONTENT -->
+    <main class="main-content">
 
-    <!-- FOOTER -->
-    {% include 'partials/footer.html' %}
+        <!-- SIDEBAR -->
+        {% include 'partials/sidebar.html' %}
+        
+        <!-- MESSAGES DJANGO -->
+        {% include 'partials/messages.html' %}
 
-    <!-- ========================= -->
-    <!-- BOOTSTRAP JS -->
-    <!-- ========================= -->
+        <!-- CONTENU PRINCIPAL -->
+        {% block content %}
+        {% endblock %}
+
+        <!-- FOOTER -->
+        {% include 'partials/footer.html' %}
+
+        <!-- ========================= -->
+        <!-- BOOTSTRAP JS -->
+        <!-- ========================= -->
+
+    </main>
+
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
     </script>

@@ -1,0 +1,93 @@
+{% if user.is_authenticated %}
+
+<div class="sidebar shadow">
+
+    <!-- HEADER -->
+    <div class="sidebar-header">
+
+        <h4 class="fw-bold">
+
+            FoodCare
+
+        </h4>
+
+        <p class="small text-light">
+
+            Navigation rapide
+
+        </p>
+
+    </div>
+
+    <!-- MENU -->
+    <ul class="sidebar-menu">
+
+        <li>
+
+            <a href="{% url 'order_list' %}">
+
+                📦 Mes commandes
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a href="{% url 'reservation_list' %}">
+
+                📅 Réservations
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a href="{% url 'reserve_table' %}">
+
+                🍽 Réserver une table
+
+            </a>
+
+        </li>
+
+        <li>
+
+            <a href="{% url 'payment_history' %}">
+
+                💳 Paiements
+
+            </a>
+
+        </li>
+
+        {% if user.is_staff %}
+
+            <li>
+
+                <a href="{% url 'dashboard' %}">
+
+                    📊 Dashboard
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="{% url 'admin_reservations' %}">
+
+                    🪑 Gestion réservations
+
+                </a>
+
+            </li>
+
+        {% endif %}
+
+    </ul>
+
+</div>
+
+{% endif %}
