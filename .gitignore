@@ -1,0 +1,18 @@
+# Environnement virtuel
+env/
+
+# Fichiers Python
+__pycache__/
+*.pyc
+
+# Base de données
+db.sqlite3
+
+# VS Code
+.vscode/
+
+# Fichiers médias temporaires
+media/
+
+# Variables d'environnement
+.env
