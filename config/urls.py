@@ -31,6 +31,8 @@ urlpatterns = [
 
     path('meals/', include('meals.urls')),
 
+    path('orders/', include('orders.urls')),
+
 ]
 
 # Configuration des fichiers media

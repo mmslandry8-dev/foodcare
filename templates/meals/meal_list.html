@@ -315,6 +315,12 @@
                             <h5 class="text-success fw-bold mt-3">
 
                                 {{ meal.price }} FCFA
+                                <a href="{% url 'add_to_cart' meal.id %}"
+                                    class="btn btn-success btn-lg">
+
+                                        Ajouter au panier
+
+                                </a>
 
                             </h5>
 

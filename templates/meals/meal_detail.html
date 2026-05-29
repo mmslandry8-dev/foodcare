@@ -44,7 +44,16 @@
 
                     {{ meal.price }} FCFA
 
+                    <a href="{% url 'add_to_cart' meal.id %}"
+                        class="btn btn-success btn-lg">
+
+                        Ajouter au panier
+
+                    </a>
+
                 </h3>
+
+                
 
                 <!-- NUTRITION -->
                 <div class="card border-0 shadow-sm p-4">

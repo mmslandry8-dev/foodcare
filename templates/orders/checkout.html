@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-6">
+
+                <div class="card border-0 shadow p-5">
+
+                    <h2 class="fw-bold text-success mb-4">
+
+                        Paiement
+
+                    </h2>
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+
+                                Méthode de paiement
+
+                            </label>
+
+                            <select
+                                name="payment_method"
+                                class="form-select">
+
+                                <option value="mobile_money">
+
+                                    Mobile Money
+
+                                </option>
+
+                                <option value="card">
+
+                                    Carte bancaire
+
+                                </option>
+
+                                <option value="cash">
+
+                                    Paiement livraison
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <button
+                            class="btn btn-success w-100">
+
+                            Confirmer commande
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

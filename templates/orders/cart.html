@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="py-5">
+
+    <div class="container">
+
+        <h1 class="fw-bold text-success mb-5">
+
+            Mon panier
+
+        </h1>
+
+        {% if cart_items %}
+
+            <div class="card border-0 shadow p-4">
+
+                {% for item in cart_items %}
+
+                    <div class="row align-items-center mb-4">
+
+                        <div class="col-lg-2">
+
+                            <img
+                                src="{{ item.meal.image.url }}"
+                                class="img-fluid rounded"
+                            >
+
+                        </div>
+
+                        <div class="col-lg-4">
+
+                            <h5>
+
+                                {{ item.meal.name }}
+
+                            </h5>
+
+                        </div>
+
+                        <div class="col-lg-2">
+
+                            x{{ item.quantity }}
+
+                        </div>
+
+                        <div class="col-lg-2">
+
+                            {{ item.subtotal }} FCFA
+
+                        </div>
+
+                        <div class="col-lg-2">
+
+                            <a href="{% url 'remove_from_cart' item.meal.id %}"
+                               class="btn btn-danger">
+
+                                Supprimer
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+                <hr>
+
+                <div class="d-flex justify-content-between">
+
+                    <h4>Total :</h4>
+
+                    <h4 class="text-success">
+
+                        {{ total }} FCFA
+
+                    </h4>
+
+                </div>
+
+                <a href="{% url 'checkout' %}"
+                   class="btn btn-success mt-4">
+
+                    Valider la commande
+
+                </a>
+
+            </div>
+
+        {% else %}
+
+            <div class="text-center py-5">
+
+                <h3>
+
+                    Votre panier est vide.
+
+                </h3>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}
