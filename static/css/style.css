@@ -216,13 +216,13 @@ SIDEBAR
 
     position: fixed;
 
-    top: 0;
+    top: 82px;
 
     left: 0;
 
     width: 260px;
 
-    height: 100vh;
+    height: calc(100vh - 82px);
 
     background: linear-gradient(
         180deg,
@@ -234,7 +234,7 @@ SIDEBAR
 
     padding: 30px 20px;
 
-    z-index: 2000;
+    z-index: 1000;
 
     overflow-y: auto;
 }
@@ -288,7 +288,11 @@ CONTENU PRINCIPAL
 
     margin-left: 260px;
 
-    min-height: 100vh;
+    min-height: calc(100vh - 82px);
+
+    display: flex;
+
+    flex-direction: column;
 }
 
 /* =========================
@@ -299,15 +303,26 @@ RESPONSIVE
 
     .sidebar {
 
+        position: relative;
+
+        top: 0;
+
         width: 100%;
 
         height: auto;
-
-        position: relative;
     }
 
     .main-content {
 
         margin-left: 0;
     }
+}
+
+/* =========================
+BODY OFFSET NAVBAR
+========================= */
+
+body {
+
+    padding-top: 82px;
 }
