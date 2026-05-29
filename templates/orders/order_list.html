@@ -94,6 +94,22 @@
 
                                 </h4>
 
+                                <!-- BOUTON J'AI RECU -->
+                                {% if order.can_confirm_delivery %}
+
+                                    <div class="mt-4">
+
+                                        <a href="{% url 'confirm_delivery' order.id %}"
+                                            class="btn btn-success btn-lg">
+
+                                                J'ai reçu ma commande
+
+                                            </a>
+
+                                    </div>
+
+                                {% endif %}
+
                                 <!-- BOUTON -->
                                 <a href="{% url 'order_detail' order.id %}"
                                    class="btn btn-success mt-3">

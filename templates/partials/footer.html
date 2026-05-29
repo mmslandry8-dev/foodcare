@@ -41,7 +41,7 @@
                     </li>
 
                     <li>
-                        <a href="#"
+                        <a href="{% url 'meal_list' %}"
                            class="text-decoration-none text-light">
                             Menus
                         </a>
@@ -53,6 +53,20 @@
                             Contact
                         </a>
                     </li>
+                    {% if user.is_staff %}
+
+                        <li class="nav-item mx-2">
+
+                            <a class="nav-link"
+                                href="{% url 'dashboard' %}">
+
+                                📊 Dashboard
+
+                            </a>
+
+                        </li>
+
+                    {% endif %}
 
                 </ul>
 

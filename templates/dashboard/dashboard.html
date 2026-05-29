@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="py-5 bg-light min-vh-100">
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="mb-5">
+
+            <h1 class="fw-bold text-success">
+
+                Dashboard FoodCare
+
+            </h1>
+
+            <p class="text-muted">
+
+                Administration intelligente du restaurant
+
+            </p>
+
+        </div>
+
+        <!-- STATS -->
+        <div class="row">
+
+            <!-- USERS -->
+            <div class="col-lg-3 mb-4">
+
+                <div class="card border-0 shadow p-4">
+
+                    <h5 class="text-muted">
+
+                        Utilisateurs
+
+                    </h5>
+
+                    <h1 class="fw-bold text-success">
+
+                        {{ total_users }}
+
+                    </h1>
+
+                </div>
+
+            </div>
+
+            <!-- MEALS -->
+            <div class="col-lg-3 mb-4">
+
+                <div class="card border-0 shadow p-4">
+
+                    <h5 class="text-muted">
+
+                        Repas
+
+                    </h5>
+
+                    <h1 class="fw-bold text-primary">
+
+                        {{ total_meals }}
+
+                    </h1>
+
+                </div>
+
+            </div>
+
+            <!-- ORDERS -->
+            <div class="col-lg-3 mb-4">
+
+                <div class="card border-0 shadow p-4">
+
+                    <h5 class="text-muted">
+
+                        Commandes
+
+                    </h5>
+
+                    <h1 class="fw-bold text-warning">
+
+                        {{ total_orders }}
+
+                    </h1>
+
+                </div>
+
+            </div>
+
+            <!-- REVENUE -->
+            <div class="col-lg-3 mb-4">
+
+                <div class="card border-0 shadow p-4">
+
+                    <h5 class="text-muted">
+
+                        Revenus
+
+                    </h5>
+
+                    <h1 class="fw-bold text-danger">
+
+                        {{ revenue }} FCFA
+
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="row mt-4">
+
+            <div class="col-lg-4 mb-4">
+
+                <a href="{% url 'dashboard_orders' %}"
+                   class="text-decoration-none">
+
+                    <div class="card border-0 shadow p-5
+                                dashboard-card">
+
+                        <h3 class="fw-bold text-success">
+
+                            📦 Commandes
+
+                        </h3>
+
+                        <p class="text-muted">
+
+                            Gérer les commandes
+                            clients
+
+                        </p>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- COMMANDES RECENTES -->
+        <div class="card border-0 shadow p-4 mt-5">
+
+            <h3 class="fw-bold mb-4">
+
+                Commandes récentes
+
+            </h3>
+
+            <div class="table-responsive">
+
+                <table class="table align-middle">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Client</th>
+                            <th>Total</th>
+                            <th>Statut</th>
+                            <th>Date</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for order in recent_orders %}
+
+                            <tr>
+
+                                <td>
+
+                                    #{{ order.id }}
+
+                                </td>
+
+                                <td>
+
+                                    {{ order.user.username }}
+
+                                </td>
+
+                                <td>
+
+                                    {{ order.total_price }} FCFA
+
+                                </td>
+
+                                <td>
+
+                                    {{ order.get_status_display }}
+
+                                </td>
+
+                                <td>
+
+                                    {{ order.created_at|date:"d/m/Y H:i" }}
+
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

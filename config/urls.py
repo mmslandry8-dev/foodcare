@@ -33,6 +33,9 @@ urlpatterns = [
 
     path('orders/', include('orders.urls')),
 
+    # Dashboard
+    path('dashboard/', include('dashboard.urls')),
+
 ]
 
 # Configuration des fichiers media

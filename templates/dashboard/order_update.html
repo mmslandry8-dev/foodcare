@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="py-5 bg-light min-vh-100">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-6">
+
+                <div class="card border-0 shadow p-5">
+
+                    <h2 class="fw-bold text-success mb-4">
+
+                        Modifier commande #{{ order.id }}
+
+                    </h2>
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+
+                                Nouveau statut
+
+                            </label>
+
+                            <select
+                                name="status"
+                                class="form-select">
+
+                                {% if order.status == 'pending' %}
+
+                                    <option value="ready">
+
+                                        Prête
+
+                                    </option>
+
+                                    <option value="cancelled">
+
+                                        Annulée
+
+                                    </option>
+
+                                {% elif order.status == 'ready' %}
+
+                                    <option value="delivery">
+
+                                        En livraison
+
+                                    </option>
+
+                                {% elif order.status == 'delivery' %}
+
+                                    <option value="delivered">
+
+                                        Livrée
+
+                                    </option>
+
+                                {% endif %}
+
+                            </select>
+
+                        </div>
+
+                        <button
+                            class="btn btn-success w-100">
+
+                            Mettre à jour
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

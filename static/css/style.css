@@ -189,3 +189,21 @@ body {
     transform: scale(1.05);
 
 }
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard-card {
+
+    border-radius: 20px;
+
+    transition: 0.3s ease;
+
+}
+
+.dashboard-card:hover {
+
+    transform: translateY(-8px);
+
+}
