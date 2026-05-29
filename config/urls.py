@@ -41,6 +41,13 @@ urlpatterns = [
         include('reservations.urls')
     ),
 
+    path(
+        'payments/',
+        include('payments.urls')
+    ),
+
+    
+
 ]
 
 # Configuration des fichiers media

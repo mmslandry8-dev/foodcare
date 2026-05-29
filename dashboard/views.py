@@ -14,6 +14,8 @@ from orders.models import Order
 
 from reservations.models import Reservation
 
+from payments.models import Payment
+
 
 @staff_member_required
 def dashboard_home(request):
@@ -28,6 +30,8 @@ def dashboard_home(request):
     total_orders = Order.objects.count()
 
     total_reservations = Reservation.objects.count()
+
+    total_payments = Payment.objects.count()
 
     revenue = Order.objects.filter(
 
@@ -56,6 +60,8 @@ def dashboard_home(request):
         'recent_orders': recent_orders,
 
         'total_reservations': total_reservations,
+
+        'total_payments': total_payments,
 
     }
 

@@ -187,7 +187,7 @@ def checkout_view(request):
         )
 
         return redirect(
-            'order_detail',
+            'process_payment',
             order.id
         )
 

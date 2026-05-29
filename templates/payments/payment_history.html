@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="py-5">
+
+    <div class="container">
+
+        <h1 class="fw-bold text-success mb-5">
+
+            Historique paiements
+
+        </h1>
+
+        <div class="row">
+
+            {% for payment in payments %}
+
+                <div class="col-lg-6 mb-4">
+
+                    <div class="card border-0 shadow p-4">
+
+                        <div class="d-flex
+                                    justify-content-between
+                                    align-items-center">
+
+                            <h5>
+
+                                Paiement #{{ payment.id }}
+
+                            </h5>
+
+                            <span class="badge bg-success">
+
+                                {{ payment.get_status_display }}
+
+                            </span>
+
+                        </div>
+
+                        <hr>
+
+                        <p>
+
+                            💳 {{ payment.get_method_display }}
+
+                        </p>
+
+                        <p>
+
+                            💰 {{ payment.amount }} FCFA
+
+                        </p>
+
+                        <p>
+
+                            🧾 {{ payment.transaction_id }}
+
+                        </p>
+
+                        <p>
+
+                            📅 {{ payment.created_at|date:"d/m/Y H:i" }}
+
+                        </p>
+
+                        <a href="{% url 'generate_invoice' payment.id %}"
+                           class="btn btn-dark">
+
+                            Télécharger facture PDF
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            {% empty %}
+
+                <div class="text-center py-5">
+
+                    <h3>
+
+                        Aucun paiement.
+
+                    </h3>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -109,6 +109,17 @@
 
                 </li>
 
+                <li class="nav-item mx-2">
+
+                    <a class="nav-link"
+                        href="{% url 'payment_history' %}">
+
+                            💳 Paiements
+
+                    </a>
+
+                </li>
+
                 <!-- BOUTONS -->
                 {% if user.is_authenticated %}
 
@@ -135,6 +146,7 @@
                             </a>
 
                         </li>
+
 
                     {% endif %}
 

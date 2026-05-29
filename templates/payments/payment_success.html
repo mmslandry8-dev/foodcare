@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="py-5 min-vh-100 bg-light">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-7">
+
+                <div class="card border-0 shadow p-5 text-center">
+
+                    <div class="mb-4">
+
+                        <h1 class="display-1">
+
+                            ✅
+
+                        </h1>
+
+                    </div>
+
+                    <h1 class="fw-bold text-success mb-4">
+
+                        Paiement réussi
+
+                    </h1>
+
+                    <p class="lead">
+
+                        Votre commande a été validée.
+
+                    </p>
+
+                    <hr>
+
+                    <div class="text-start">
+
+                        <p>
+
+                            <strong>Transaction :</strong>
+
+                            {{ payment.transaction_id }}
+
+                        </p>
+
+                        <p>
+
+                            <strong>Montant :</strong>
+
+                            {{ payment.amount }} FCFA
+
+                        </p>
+
+                        <p>
+
+                            <strong>Méthode :</strong>
+
+                            {{ payment.get_method_display }}
+
+                        </p>
+
+                        <p>
+
+                            <strong>Statut :</strong>
+
+                            {{ payment.get_status_display }}
+
+                        </p>
+
+                    </div>
+
+                    <div class="mt-4">
+
+                        <a href="{% url 'payment_history' %}"
+                           class="btn btn-success">
+
+                            Voir mes paiements
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
