@@ -22,4 +22,16 @@ urlpatterns = [
         name='update_order_status'
     ),
 
+    path(
+        'menus/',
+        views.menu_management,
+        name='menu_management'
+    ),
+
+    path(
+        'payments/',
+        views.admin_payments,
+        name='admin_payments'
+    ),
+
 ]

@@ -171,3 +171,35 @@ def update_order_status(request, pk):
         'dashboard/order_update.html',
         context
     )
+
+@staff_member_required
+def menu_management(request):
+
+    meals = Meal.objects.all().order_by('-id')
+
+    context = {
+        'meals': meals
+    }
+
+    return render(
+        request,
+        'dashboard/menu_management.html',
+        context
+    )
+
+@staff_member_required
+def admin_payments(request):
+
+    payments = Payment.objects.all().order_by('-id')
+
+    context = {
+
+        'payments': payments
+
+    }
+
+    return render(
+        request,
+        'dashboard/admin_payments.html',
+        context
+    )
