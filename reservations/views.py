@@ -209,6 +209,17 @@ def update_reservation_status(request, pk):
         return redirect(
             'admin_reservations'
         )
+    
+        if reservation.status in ['completed', 'cancelled']:
+
+            messages.error(
+                equest,
+                "Cette réservation ne peut plus être modifiée."
+            )
+
+            return redirect(
+                'admin_reservations'
+            )
 
     context = {
 

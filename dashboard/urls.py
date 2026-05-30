@@ -34,4 +34,10 @@ urlpatterns = [
         name='admin_payments'
     ),
 
+    path(
+        'payments/invoice/<int:pk>/',
+        views.admin_invoice,
+        name='admin_invoice'
+    ),
+
 ]

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-6">
+
+            <div class="card shadow border-0">
+
+                <div class="card-header bg-danger text-white">
+
+                    <h3>
+
+                        🗑 Supprimer un repas
+
+                    </h3>
+
+                </div>
+
+                <div class="card-body text-center">
+
+                    <h4>
+
+                        {{ meal.name }}
+
+                    </h4>
+
+                    <p class="text-muted">
+
+                        Cette action est irréversible.
+
+                    </p>
+
+                    {% if meal.image %}
+
+                        <img src="{{ meal.image.url }}"
+                             class="img-fluid rounded mb-3"
+                             style="max-height:250px;">
+
+                    {% endif %}
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <a href="{% url 'menu_management' %}"
+                           class="btn btn-secondary">
+
+                            Annuler
+
+                        </a>
+
+                        <button type="submit"
+                                class="btn btn-danger">
+
+                            Confirmer la suppression
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

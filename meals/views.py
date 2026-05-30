@@ -9,6 +9,8 @@ from .forms import MealForm
 
 from .utils import get_recommended_meals
 
+from django.contrib.admin.views.decorators import staff_member_required
+
 
 def meal_list(request):
     """
@@ -140,6 +142,7 @@ def meal_detail(request, pk):
 
 
 @login_required
+@staff_member_required
 def meal_create(request):
     """
     Création d'un repas
@@ -200,4 +203,57 @@ def recommendations(request):
 
         context
 
+    )
+
+@login_required
+@staff_member_required
+def meal_update(request, pk):
+
+    meal = get_object_or_404(
+        Meal,
+        pk=pk
+    )
+
+    form = MealForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=meal
+    )
+
+    if form.is_valid():
+
+        form.save()
+
+        return redirect(
+            'menu_management'
+        )
+
+    return render(
+        request,
+        'meals/meal_update.html',
+        {'form': form}
+    )
+
+
+@login_required
+@staff_member_required
+def meal_delete(request, pk):
+
+    meal = get_object_or_404(
+        Meal,
+        pk=pk
+    )
+
+    if request.method == 'POST':
+
+        meal.delete()
+
+        return redirect(
+            'menu_management'
+        )
+
+    return render(
+        request,
+        'meals/meal_delete.html',
+        {'meal': meal}
     )

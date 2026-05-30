@@ -49,72 +49,46 @@
 
 <body>
 
-    <!-- NAVBAR -->
     {% include 'partials/navbar.html' %}
 
-    
+    <div class="site-wrapper">
 
-     <!-- MAIN CONTENT -->
-    <main class="
-        {% if user.is_authenticated %}
-            content-area
-        {% else %}
-            content-area-full
-        {% endif %}
-    ">
-
-        <!-- SIDEBAR -->
         {% if user.is_authenticated %}
 
             {% if user.is_staff %}
-
                 {% include 'partials/admin_sidebar.html' %}
-
             {% else %}
-
                 {% include 'partials/client_sidebar.html' %}
-
             {% endif %}
 
         {% endif %}
-        
-        <!-- MESSAGES DJANGO -->
-        {% include 'partials/messages.html' %}
 
-        <!-- CONTENU PRINCIPAL -->
-        {% block content %}
-        {% endblock %}
+        <div class="page-wrapper">
 
-        <!-- FOOTER -->
-        {% include 'partials/footer.html' %}
+            {% include 'partials/messages.html' %}
 
-        <!-- ========================= -->
-        <!-- BOOTSTRAP JS -->
-        <!-- ========================= -->
+            <main class="page-content">
 
-    </main>
+                {% block content %}
+                {% endblock %}
 
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-    </script>
+            </main>
 
-    <!-- ========================= -->
-    <!-- AOS JS -->
-    <!-- ========================= -->
-    <script
-        src="https://unpkg.com/aos@2.3.4/dist/aos.js">
-    </script>
+            {% include 'partials/footer.html' %}
 
-    <!-- INITIALISATION AOS -->
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
     <script>
-
         AOS.init({
-            duration: 1000,
-            once: true,
+            duration:1000,
+            once:true
         });
-
     </script>
 
 </body>
-
-</html>

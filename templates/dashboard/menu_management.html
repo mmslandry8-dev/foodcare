@@ -10,11 +10,21 @@
             🍽 Gestion des menus
         </h2>
 
+        <form method="GET" class="mb-4">
+
+            <input
+                type="text"
+                name="q"
+                class="form-control"
+                placeholder="Rechercher un repas..."
+                value="{{ request.GET.q }}"
+            >
+
+        </form>
+
         <a href="{% url 'meal_create' %}"
            class="btn btn-success">
-
-            + Ajouter un repas
-
+            ➕ Ajouter un repas 
         </a>
 
     </div>
@@ -31,8 +41,10 @@
 
                         <th>Image</th>
                         <th>Nom</th>
+                        <th>Catégorie</th>
+                        <th>Calories</th>
                         <th>Prix</th>
-                        <th>Disponible</th>
+                        <th>Disponibilité</th>
                         <th>Actions</th>
 
                     </tr>
@@ -57,6 +69,14 @@
                         </td>
 
                         <td>
+                            {{ meal.category.name }}
+                        </td>
+
+                        <td>
+                            {{ meal.calories }} kcal
+                        </td>
+
+                        <td>
                             {{ meal.price }} FCFA
                         </td>
 
@@ -64,11 +84,19 @@
 
                             {% if meal.is_available %}
 
-                                ✅
+                                <span class="badge bg-success">
+
+                                    Disponible
+
+                                </span>
 
                             {% else %}
 
-                                ❌
+                                <span class="badge bg-danger">
+
+                                    Indisponible
+
+                                </span>
 
                             {% endif %}
 
@@ -76,17 +104,17 @@
 
                         <td>
 
-                            <a href="#"
-                               class="btn btn-warning btn-sm">
+                            <a href="{% url 'meal_update' meal.id %}"
+                                class="btn btn-warning btn-sm">
 
-                                Modifier
+                                    ✏ Modifier
 
                             </a>
 
-                            <a href="#"
-                               class="btn btn-danger btn-sm">
+                            <a href="{% url 'meal_delete' meal.id %}"
+                                class="btn btn-danger btn-sm">
 
-                                Supprimer
+                                    🗑 Supprimer
 
                             </a>
 

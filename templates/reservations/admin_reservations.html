@@ -78,15 +78,27 @@
 
                                 <td>
 
-                                    <a href="{% url 'update_reservation_status' reservation.id %}"
-                                        class="btn btn-success btn-sm">
+                                    {% if reservation.status != 'completed' and reservation.status != 'cancelled' %}
 
-                                        Modifier
+                                        <a href="{% url 'reservation_update' reservation.id %}"
+                                            class="btn btn-warning btn-sm">
 
-                                    </a>
+                                            Modifier
+
+                                        </a>
+
+                                    {% else %}
+
+                                        <span class="badge bg-secondary">
+
+                                            - - - - - -
+
+                                        </span>
+
+                                    {% endif %}
 
                                 </td>
-                                
+
                             </tr>
 
                         {% endfor %}

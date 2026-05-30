@@ -42,23 +42,73 @@
                     </td>
 
                     <td>
-                        {{ payment.method }}
+
+                        {% if payment.method == 'mobile_money' %}
+
+                            Mobile Money
+
+                        {% elif payment.method == 'card' %}
+
+                            Carte bancaire
+
+                        {% else %}
+
+                            Paiement livraison
+
+                        {% endif %}
+
                     </td>
 
                     <td>
-                        {{ payment.status }}
+
+                        {% if payment.status == 'validated' %}
+
+                            <span class="badge bg-success">
+
+                                Validé
+
+                            </span>
+
+                        {% elif payment.status == 'pending' %}
+
+                            <span class="badge bg-warning">
+
+                                En attente
+
+                            </span>
+
+                        {% elif payment.status == 'failed' %}
+
+                            <span class="badge bg-danger">
+
+                                Échoué
+
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-secondary">
+
+                                Remboursé
+
+                            </span>
+
+                        {% endif %}
+
                     </td>
 
                     <td>
-                        {{ payment.created_at }}
+
+                        {{ payment.created_at|date:"d/m/Y H:i" }}
+
                     </td>
 
                     <td>
 
-                        <a href="#"
-                           class="btn btn-success btn-sm">
+                        <a href="{% url 'admin_invoice' payment.id %}"
+                            class="btn btn-success btn-sm">
 
-                            Télécharger
+                            Télécharger la facture
 
                         </a>
 

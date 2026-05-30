@@ -1,93 +1,120 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-dark foodcare-navbar">
 
     <div class="container-fluid px-4">
 
-        <div class="row w-100 align-items-center">
+        <!-- Logo -->
 
-            <!-- LOGO -->
+        <a class="navbar-brand fw-bold fs-3"
+           href="{% url 'home' %}">
 
-            <div class="col-lg-4">
+            <i class="bi bi-heart-pulse-fill"></i>
+            FoodCare
 
-                <a class="navbar-brand fw-bold fs-3"
-                   href="{% url 'home' %}">
+        </a>
 
-                    <i class="bi bi-heart-pulse-fill"></i>
-                     FoodCare
+        <!-- Hamburger -->
 
-                </a>
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarFoodCare">
 
-            </div>
+            <span class="navbar-toggler-icon"></span>
 
-            <!-- CENTRE -->
+        </button>
 
-            <div class="col-lg-4 text-center">
+        <div class="collapse navbar-collapse"
+             id="navbarFoodCare">
+
+            <!-- Centre -->
+
+            <ul class="navbar-nav mx-auto">
 
                 {% if user.is_authenticated and user.is_staff %}
 
-                    <a href="{% url 'dashboard' %}"
-                       class="nav-link text-white fw-bold">
+                    <li class="nav-item">
 
-                        Dashboard
+                        <a href="{% url 'dashboard' %}"
+                           class="nav-link fw-bold">
 
-                    </a>
+                            Dashboard
+
+                        </a>
+
+                    </li>
 
                 {% else %}
 
-                    <a href="{% url 'home' %}"
-                       class="nav-link d-inline text-white mx-2">
-                        Accueil
-                    </a>
+                    <li class="nav-item">
 
-                    <a href="{% url 'meal_list' %}"
-                       class="nav-link d-inline text-white mx-2">
-                        Menus
-                    </a>
+                        <a href="{% url 'home' %}"
+                           class="nav-link">
 
-                    <a href="{% url 'recommendations' %}"
-                       class="nav-link d-inline text-white mx-2">
-                        Recommandations
-                    </a>
+                            Accueil
 
-                    <a href="#"
-                       class="nav-link d-inline text-white mx-2">
-                        Contact
-                    </a>
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a href="{% url 'meal_list' %}"
+                           class="nav-link">
+
+                            Menus
+
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a href="{% url 'recommendations' %}"
+                           class="nav-link">
+
+                            Recommandations
+
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item">
+
+                        <a href="#"
+                           class="nav-link">
+
+                            Contact
+
+                        </a>
+
+                    </li>
 
                 {% endif %}
 
-            </div>
+            </ul>
 
-            <!-- DROITE -->
+            <!-- Droite -->
 
-            <div class="col-lg-4 text-end">
+            <div class="d-flex flex-column flex-lg-row gap-2">
 
                 {% if user.is_authenticated %}
 
                     {% if not user.is_staff %}
 
                         <a href="{% url 'profile' %}"
-                           class="btn btn-light btn-sm me-2">
+                           class="btn btn-light btn-sm">
 
-                            <span class="text-black fw-bold">
-
-                                👤 {{ user.username }}
-
-                            </span>
+                            👤 {{ user.username }}
 
                         </a>
 
                     {% else %}
 
-                        <a href="#"
-                           class="btn btn-light btn-sm me-2">
+                        <span class="btn btn-light btn-sm">
 
-                            <span class="text-black fw-bold">
+                            👤 {{ user.username }}
 
-                                👤 {{ user.username }}
-
-                            </span>
-
-                        </a>
+                        </span>
 
                     {% endif %}
 
@@ -101,7 +128,7 @@
                 {% else %}
 
                     <a href="{% url 'login' %}"
-                       class="btn btn-light btn-sm me-2">
+                       class="btn btn-light btn-sm">
 
                         Connexion
 

@@ -27,4 +27,18 @@ urlpatterns = [
         name='recommendations'
     ),
 
+    path(
+        'edit/<int:pk>/',
+        views.meal_update,
+        name='meal_update'
+    ),
+
+    path(
+        'delete/<int:pk>/',
+        views.meal_delete,
+        name='meal_delete'
+    ),
+
+    
+
 ]
