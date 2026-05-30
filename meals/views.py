@@ -173,6 +173,7 @@ def meal_create(request):
         context
     )
 
+@login_required
 def recommendations(request):
     """
     Recommandations nutritionnelles
