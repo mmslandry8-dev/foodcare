@@ -326,3 +326,26 @@ body {
 
     padding-top: 82px;
 }
+
+/* =======================
+   CONTENU AVEC SIDEBAR
+======================= */
+
+.content-area {
+
+    margin-left: 260px;
+    padding: 30px;
+    min-height: 80vh;
+
+}
+
+/* =======================
+   CONTENU SANS SIDEBAR
+======================= */
+
+.content-area-full {
+
+    padding: 30px;
+    min-height: 80vh;
+
+}

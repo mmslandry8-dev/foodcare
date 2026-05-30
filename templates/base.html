@@ -55,10 +55,28 @@
     
 
      <!-- MAIN CONTENT -->
-    <main class="main-content">
+    <main class="
+        {% if user.is_authenticated %}
+            content-area
+        {% else %}
+            content-area-full
+        {% endif %}
+    ">
 
         <!-- SIDEBAR -->
-        {% include 'partials/sidebar.html' %}
+        {% if user.is_authenticated %}
+
+            {% if user.is_staff %}
+
+                {% include 'partials/admin_sidebar.html' %}
+
+            {% else %}
+
+                {% include 'partials/client_sidebar.html' %}
+
+            {% endif %}
+
+        {% endif %}
         
         <!-- MESSAGES DJANGO -->
         {% include 'partials/messages.html' %}

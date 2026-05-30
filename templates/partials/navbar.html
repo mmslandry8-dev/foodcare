@@ -1,175 +1,104 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm py-3 fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm">
 
-    <div class="container">
+    <div class="container-fluid px-4">
 
-        <!-- LOGO -->
-        <a class="navbar-brand fw-bold fs-3"
-           href="{% url 'home' %}">
+        <div class="row w-100 align-items-center">
 
-            <i class="bi bi-heart-pulse-fill"></i>
+            <!-- LOGO -->
 
-            FoodCare
+            <div class="col-lg-4">
 
-        </a>
+                <a class="navbar-brand fw-bold fs-3"
+                   href="{% url 'home' %}">
 
-        <!-- TOGGLER -->
-        <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarContent">
+                    ❤️ FoodCare
 
-            <span class="navbar-toggler-icon"></span>
+                </a>
 
-        </button>
+            </div>
 
-        <!-- MENU -->
-        <div
-            class="collapse navbar-collapse"
-            id="navbarContent">
+            <!-- CENTRE -->
 
-            <ul class="navbar-nav ms-auto align-items-lg-center">
+            <div class="col-lg-4 text-center">
 
-                <!-- ACCUEIL -->
-                <li class="nav-item mx-2">
+                {% if user.is_authenticated and user.is_staff %}
 
-                    <a class="nav-link"
-                       href="{% url 'home' %}">
+                    <a href="{% url 'dashboard' %}"
+                       class="nav-link text-white fw-bold">
 
-                        Accueil
+                        Dashboard
 
                     </a>
-
-                </li>
-
-                <!-- MENUS -->
-                <li class="nav-item mx-2">
-
-                    <a class="nav-link"
-                       href="{% url 'meal_list' %}">
-
-                        Menus
-
-                    </a>
-
-                </li>
-
-                <li class="nav-item mx-2">
-
-                    <a class="nav-link"
-                        href="{% url 'recommendations' %}">
-
-                            Recommandations
-
-                    </a>
-
-                </li>
-
-                <!-- CONTACT -->
-                <li class="nav-item mx-2">
-
-                    <a class="nav-link"
-                       href="#">
-
-                        Contact
-
-                    </a>
-
-                </li>
-
-                <!-- PANIER -->
-                {% if user.is_authenticated %}
-
-                    <li class="nav-item mx-2">
-
-                        <a class="nav-link position-relative"
-                           href="{% url 'cart' %}">
-
-                            🛒 Panier
-
-                            {% if cart_count > 0 %}
-
-                                <span class="badge rounded-pill bg-danger">
-
-                                    {{ cart_count }}
-
-                                </span>
-
-                            {% endif %}
-
-                        </a>
-
-                    </li>
-
-                {% endif %}
-
-                <!-- PROFIL -->
-                {% if user.is_authenticated %}
-
-                    <li class="nav-item mx-2">
-
-                        <a class="nav-link"
-                           href="{% url 'profile' %}">
-
-                            👤 Profil
-
-                        </a>
-
-                    </li>
-
-                {% endif %}
-
-                <!-- AUTH -->
-                {% if user.is_authenticated %}
-
-                    <li class="nav-item mx-2">
-
-                        <span class="text-white fw-bold">
-
-                            {{ user.username }}
-
-                        </span>
-
-                    </li>
-
-                    <li class="nav-item ms-lg-3">
-
-                        <a href="{% url 'logout' %}"
-                           class="btn btn-light text-success fw-bold px-4">
-
-                            Déconnexion
-
-                        </a>
-
-                    </li>
 
                 {% else %}
 
-                    <li class="nav-item ms-lg-3">
+                    <a href="{% url 'home' %}"
+                       class="nav-link d-inline text-white mx-2">
+                        Accueil
+                    </a>
 
-                        <a href="{% url 'login' %}"
-                           class="btn btn-light text-success fw-bold px-4 me-2">
+                    <a href="{% url 'meal_list' %}"
+                       class="nav-link d-inline text-white mx-2">
+                        Menus
+                    </a>
 
-                            Connexion
+                    <a href="{% url 'recommendations' %}"
+                       class="nav-link d-inline text-white mx-2">
+                        Recommandations
+                    </a>
 
-                        </a>
-
-                    </li>
-
-                    <li class="nav-item">
-
-                        <a href="{% url 'register' %}"
-                           class="btn btn-outline-light fw-bold px-4">
-
-                            Inscription
-
-                        </a>
-
-                    </li>
+                    <a href="#"
+                       class="nav-link d-inline text-white mx-2">
+                        Contact
+                    </a>
 
                 {% endif %}
 
-            </ul>
+            </div>
+
+            <!-- DROITE -->
+
+            <div class="col-lg-4 text-end">
+
+                {% if user.is_authenticated %}
+
+                    {% if not user.is_staff %}
+
+                        <a href="{% url 'profile' %}"
+                           class="btn btn-light btn-sm me-2">
+
+                            Profil
+
+                        </a>
+
+                    {% endif %}
+
+                    <a href="{% url 'logout' %}"
+                       class="btn btn-outline-light btn-sm">
+
+                        Déconnexion
+
+                    </a>
+
+                {% else %}
+
+                    <a href="{% url 'login' %}"
+                       class="btn btn-light btn-sm me-2">
+
+                        Connexion
+
+                    </a>
+
+                    <a href="{% url 'register' %}"
+                       class="btn btn-outline-light btn-sm">
+
+                        Inscription
+
+                    </a>
+
+                {% endif %}
+
+            </div>
 
         </div>
 
